@@ -1,0 +1,10 @@
+{
+  "name": "copilens-crm-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix copilens-crm run dev",
+    "build": "npm --prefix copilens-crm run build",
+    "start": "npm --prefix copilens-crm run start",
+    "lint": "npm --prefix copilens-crm run lint"
+  }
+}
