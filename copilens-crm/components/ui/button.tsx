@@ -3,12 +3,12 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black disabled:pointer-events-none disabled:opacity-50 active:scale-95 cursor-pointer',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-xs sm:text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black disabled:pointer-events-none disabled:opacity-50 active:scale-95 cursor-pointer',
   {
     variants: {
       variant: {
-        default: 'bg-[#9be86a] text-[#1c1c1c] hover:bg-[#6ec93f] shadow-sm',
-        primary: 'bg-[#9be86a] text-[#1c1c1c] hover:bg-[#6ec93f] shadow-sm',
+        default: 'bg-[#1B1B1C] text-[#FFFFFF] hover:bg-[#6ec93f]',
+        primary: 'bg-[#1B1B1C] text-[#FFFFFF] hover:bg-[#1B1B1C]/95',
         secondary: 'bg-[#ecece5] text-[#14150f] hover:bg-[#e3e2da]',
         outline: 'border border-[rgba(14,16,10,0.12)] bg-transparent hover:bg-[#f4f3ef]',
         ghost: 'bg-transparent text-[#6f6e66] hover:bg-[#f4f3ef] hover:text-[#14150f]',

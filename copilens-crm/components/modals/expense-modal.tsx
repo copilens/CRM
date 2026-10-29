@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCRM } from '@/context/crm-context';
 import { ExpenseCategory } from '@/types/crm';
 import { todayStr } from '@/lib/formatters';
@@ -14,21 +14,18 @@ interface ExpenseModalProps {
 }
 
 export function ExpenseModal({ isOpen, onClose }: ExpenseModalProps) {
+  if (!isOpen) return null;
+
+  return <ExpenseModalForm onClose={onClose} />;
+}
+
+function ExpenseModalForm({ onClose }: Pick<ExpenseModalProps, 'onClose'>) {
   const { addExpense } = useCRM();
 
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState<ExpenseCategory>('Ferramentas/Software');
   const [valor, setValor] = useState('');
   const [dataDespesa, setDataDespesa] = useState(todayStr());
-
-  useEffect(() => {
-    if (isOpen) {
-      setDescricao('');
-      setCategoria('Ferramentas/Software');
-      setValor('');
-      setDataDespesa(todayStr());
-    }
-  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +44,7 @@ export function ExpenseModal({ isOpen, onClose }: ExpenseModalProps) {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen
       onClose={onClose}
       title="Registar Despesa"
       description="Insira custos e despesas operacionais para dedução no saldo líquido"

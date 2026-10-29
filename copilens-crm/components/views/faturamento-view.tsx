@@ -44,7 +44,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
         <div className="bg-[#f4f3ef] rounded-[22px] p-5">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-[#6f6e66]">Total faturado (ano)</span>
-            <div className="h-7 w-7 rounded-full bg-[#dff6bc] text-[#254a0e] flex items-center justify-center">
+            <div className="h-7 w-7 rounded-full bg-[#1B1B1C] text-[#FFFFFF] flex items-center justify-center">
               <ArrowUpRight className="h-4 w-4" />
             </div>
           </div>
@@ -57,7 +57,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
         <div className="bg-[#f4f3ef] rounded-[22px] p-5">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-[#6f6e66]">Total de despesas (ano)</span>
-            <div className="h-7 w-7 rounded-full bg-[#f8dcda] text-[#bd453c] flex items-center justify-center">
+            <div className="h-7 w-7 rounded-full bg-[#FE88E6] text-[#1B1B1C] flex items-center justify-center">
               <ArrowDownRight className="h-4 w-4" />
             </div>
           </div>

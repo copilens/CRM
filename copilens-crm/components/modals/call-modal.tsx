@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCRM } from '@/context/crm-context';
 import { CallResult } from '@/types/crm';
 import { todayStr } from '@/lib/formatters';
@@ -14,21 +14,18 @@ interface CallModalProps {
 }
 
 export function CallModal({ isOpen, onClose }: CallModalProps) {
+  if (!isOpen) return null;
+
+  return <CallModalForm onClose={onClose} />;
+}
+
+function CallModalForm({ onClose }: Pick<CallModalProps, 'onClose'>) {
   const { data, addCall } = useCRM();
 
   const [clienteId, setClienteId] = useState('');
   const [dataChamada, setDataChamada] = useState(todayStr());
   const [resultado, setResultado] = useState<CallResult>('Sem resposta');
   const [notas, setNotas] = useState('');
-
-  useEffect(() => {
-    if (isOpen) {
-      setClienteId('');
-      setDataChamada(todayStr());
-      setResultado('Sem resposta');
-      setNotas('');
-    }
-  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +42,7 @@ export function CallModal({ isOpen, onClose }: CallModalProps) {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen
       onClose={onClose}
       title="Registar Contacto / Chamada"
       description="Registe o resultado da prospecção telefónica ou contacto comercial"

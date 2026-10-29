@@ -3,7 +3,7 @@
 import React from 'react';
 import { useCRM } from '@/context/crm-context';
 import { fmtKz } from '@/lib/formatters';
-import { Eye, EyeOff, Menu, Plus, Database, CloudCheck, HardDrive } from 'lucide-react';
+import { Eye, EyeOff, Menu, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface TopbarProps {
@@ -32,7 +32,7 @@ export function Topbar({ onOpenMobileMenu, onOpenQuickMeeting }: TopbarProps) {
   const heading = VIEW_HEADINGS[activeView] || { title: 'CRM', subtitle: '' };
 
   return (
-    <header className="sticky top-0 z-20 flex items-center justify-between px-5 sm:px-8 py-4 bg-white/90 backdrop-blur-md border-b border-[rgba(14,16,10,0.05)]">
+    <header className="sticky top-0 z-20 flex items-center justify-between px-5 sm:px-8 py-4 bg-white">
       {/* Left: Mobile Toggle & Page Headings */}
       <div className="flex items-center gap-3">
         <button
@@ -44,12 +44,9 @@ export function Topbar({ onOpenMobileMenu, onOpenQuickMeeting }: TopbarProps) {
         </button>
 
         <div>
-          <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#14150f]">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#14150f]">
             {heading.title}
           </h1>
-          <p className="text-xs text-[#6f6e66] hidden sm:block">
-            {heading.subtitle}
-          </p>
         </div>
       </div>
 
@@ -58,24 +55,21 @@ export function Topbar({ onOpenMobileMenu, onOpenQuickMeeting }: TopbarProps) {
         {/* Supabase Status indicator */}
         <div
           title={isSupabaseActive ? 'Ligado ao Supabase (Nuvem)' : 'Modo Local (Offline)'}
-          className={`hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold ${
+          className={`hidden md:flex items-center rounded-full gap-1.5 px-2.5 py-1 text-[11px] font-bold ${
             isSupabaseActive
-              ? 'bg-[#dff6bc] text-[#254a0e]'
+              ? 'bg-[#FE88E6] text-[#1B1B1C]'
               : 'bg-[#ecece5] text-[#6f6e66]'
           }`}
         >
-          <Database className="h-3 w-3" />
-          <span>{isSupabaseActive ? 'Supabase Online' : 'Modo Local'}</span>
+          <span>{isSupabaseActive ? 'On' : 'Off'}</span>
         </div>
 
         {/* Saldo Actual */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className="text-right">
-            <span className="block text-[10px] uppercase font-bold tracking-wider text-[#a3a297]">
-              Saldo atual
-            </span>
+
             <span
-              className={`text-sm sm:text-lg font-extrabold tracking-tight tabular-nums ${
+              className={`text-sm sm:text-lg font-bold tracking-tight tabular-nums ${
                 !showBalance
                   ? 'text-[#6f6e66]'
                   : netBalance < 0
@@ -89,27 +83,11 @@ export function Topbar({ onOpenMobileMenu, onOpenQuickMeeting }: TopbarProps) {
 
           <button
             onClick={toggleShowBalance}
-            className="p-1.5 rounded-full bg-[#ecece5] hover:bg-[#e3e2da] text-[#6f6e66] transition-colors"
+            className="p-2 rounded-full bg-[#F2F2F2] hover:bg-[#EFEFEF] text-[#6f6e66] transition-colors"
             title={showBalance ? 'Ocultar saldo' : 'Mostrar saldo'}
           >
-            {showBalance ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
+            {showBalance ? <Eye className="h-4 w-4" /> : <EyeOff className="h-3.5 w-3.5" />}
           </button>
-        </div>
-
-        {/* Avatar */}
-        <div className="flex items-center">
-          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-[#ecece5] overflow-hidden border border-[rgba(14,16,10,0.1)] flex items-center justify-center font-bold text-xs text-[#14150f]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/JoaoMario.jpeg"
-              alt="João Mário"
-              className="h-full w-full object-cover"
-              onError={(e) => {
-                // Fallback to initial
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
-          </div>
         </div>
 
         {/* Quick Action Button */}

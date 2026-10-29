@@ -28,7 +28,7 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
   const { data, setMeetingStatus, deleteMeeting } = useCRM();
 
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState<MeetingStatus | ''>('');
   const [rangeFilter, setRangeFilter] = useState<'upcoming' | 'all' | 'past'>('upcoming');
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
@@ -92,7 +92,7 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
           {/* Status Filter */}
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            onChange={(e) => setStatusFilter(e.target.value as MeetingStatus | '')}
             className="h-9 px-3 rounded-full text-xs font-semibold bg-[#f4f3ef] border border-[rgba(14,16,10,0.1)] text-[#14150f] focus:outline-none"
           >
             <option value="">Todos os estados</option>
@@ -105,7 +105,7 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
           {/* Range Filter */}
           <select
             value={rangeFilter}
-            onChange={(e) => setRangeFilter(e.target.value as any)}
+            onChange={(e) => setRangeFilter(e.target.value as 'upcoming' | 'all' | 'past')}
             className="h-9 px-3 rounded-full text-xs font-semibold bg-[#f4f3ef] border border-[rgba(14,16,10,0.1)] text-[#14150f] focus:outline-none"
           >
             <option value="upcoming">Próximas</option>
@@ -171,7 +171,7 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
                       </div>
 
                       <div className="flex items-center gap-3">
-                        <Badge variant={m.status as any}>{capitalize(m.status)}</Badge>
+                        <Badge variant={m.status}>{capitalize(m.status)}</Badge>
 
                         {/* Dropdown Menu */}
                         <div className="relative">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCRM } from '@/context/crm-context';
 import { PaymentMethod } from '@/types/crm';
 import { todayStr } from '@/lib/formatters';
@@ -14,23 +14,19 @@ interface DealModalProps {
 }
 
 export function DealModal({ isOpen, onClose }: DealModalProps) {
+  if (!isOpen) return null;
+
+  return <DealModalForm onClose={onClose} />;
+}
+
+function DealModalForm({ onClose }: Pick<DealModalProps, 'onClose'>) {
   const { data, addDeal } = useCRM();
 
-  const [clienteId, setClienteId] = useState('');
+  const [clienteId, setClienteId] = useState(data.clients[0]?.id || '');
   const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [dataFecho, setDataFecho] = useState(todayStr());
   const [formaPagamento, setFormaPagamento] = useState<PaymentMethod>('Multicaixa');
-
-  useEffect(() => {
-    if (isOpen) {
-      setClienteId(data.clients[0]?.id || '');
-      setDescricao('');
-      setValor('');
-      setDataFecho(todayStr());
-      setFormaPagamento('Multicaixa');
-    }
-  }, [isOpen, data.clients]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +46,7 @@ export function DealModal({ isOpen, onClose }: DealModalProps) {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen
       onClose={onClose}
       title="Registar Negócio Fechado"
       description="Insira os dados da venda para atualizar o faturamento e o funil de clientes"

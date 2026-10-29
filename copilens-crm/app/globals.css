@@ -51,17 +51,17 @@
 
 
 :root {
-  --bg: #ffffff;
-  --sidebar: #ffffff;
-  --surface: #f4f3ef;
-  --surface-2: #ecece5;
-  --surface-3: #e3e2da;
+  --bg: #F2F2F2;
+  --sidebar: #F2F2F2;
+  --surface: #FBFBFB;
+  --surface-2: #EFEFEF;
+  --surface-3: #E0E0E0;
   --line: rgba(14, 16, 10, 0.08);
   --line-soft: rgba(14, 16, 10, 0.05);
-  --text: #14150f;
-  --text-muted: #6f6e66;
-  --text-faint: #a3a297;
-  --black: #1c1c1c;
+  --text: #1B1B1C;
+  --text-muted: #E0E0E0;
+  --text-faint: #EFEFEF;
+  --black: #000000;
   --green: #9be86a;
   --green-dark: #6ec93f;
   --green-soft: #dff6bc;

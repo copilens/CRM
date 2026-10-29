@@ -14,7 +14,6 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   ChevronRight,
-  CheckCircle2,
 } from 'lucide-react';
 
 const STAGES: { key: FunnelStage; label: string }[] = [
@@ -115,36 +114,23 @@ export function DashboardView() {
   return (
     <div className="space-y-6">
       {/* Signature Pipeline Funnel Rail */}
-      <div className="bg-[#1c1c1c] text-white rounded-[22px] p-5 sm:p-6 overflow-x-auto shadow-sm">
-        <div className="flex items-center justify-between min-w-[620px] gap-2">
-          {STAGES.map((stage, idx) => {
+      <div className="bg-[#1c1c1c] text-white rounded-2xl p-5 sm:p-6 overflow-x-auto">
+        <div className="flex items-center justify-between min-w-155 gap-2">
+          {STAGES.map((stage) => {
             const count = stageCounts[stage.key] || 0;
-            const isFilled = count > 0;
             return (
-              <React.Fragment key={stage.key}>
-                <div
-                  onClick={() => setActiveView('pipeline')}
-                  className="flex flex-col items-center gap-1.5 min-w-[90px] cursor-pointer group"
-                >
-                  <div
-                    className={`h-2.5 w-2.5 rounded-full transition-all ${
-                      isFilled
-                        ? 'bg-[#6ec93f] ring-4 ring-[#6ec93f]/20 scale-110'
-                        : 'bg-[#a3a297] border border-[#6f6e66]'
-                    }`}
-                  />
-                  <span className="font-extrabold text-2xl tracking-tight text-white group-hover:text-[#9be86a] transition-colors">
-                    {count}
-                  </span>
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#a3a297] text-center">
-                    {stage.label}
-                  </span>
-                </div>
-
-                {idx < STAGES.length - 1 && (
-                  <div className="flex-1 h-[1px] bg-[rgba(255,255,255,0.15)] -mt-6" />
-                )}
-              </React.Fragment>
+              <div
+                key={stage.key}
+                onClick={() => setActiveView('pipeline')}
+                className="flex flex-col items-center gap-1.5 min-w-22.5 cursor-pointer group"
+              >
+                <span className="font-bold text-2xl tracking-tight text-white transition-colors">
+                  {count}
+                </span>
+                <span className="text-[11px] uppercase font-bold tracking-wider text-white text-center">
+                  {stage.label}
+                </span>
+              </div>
             );
           })}
         </div>
@@ -265,7 +251,7 @@ export function DashboardView() {
                     <span className="text-[10px] font-bold text-[#6f6e66] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       {fmtKz(m.value)}
                     </span>
-                    <div className="w-full max-w-[42px] bg-[#ecece5] rounded-xl h-full flex items-end overflow-hidden">
+                    <div className="w-full max-w-10.5 bg-[#ecece5] rounded-xl h-full flex items-end overflow-hidden">
                       <div
                         style={{ height: `${heightPct}%` }}
                         className={`w-full rounded-xl transition-all duration-500 ${
@@ -386,7 +372,7 @@ export function DashboardView() {
                   </div>
                 </div>
 
-                <Badge variant={m.status as any}>{capitalize(m.status)}</Badge>
+                <Badge variant={m.status}>{capitalize(m.status)}</Badge>
               </div>
             ))}
           </div>

@@ -121,7 +121,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
                 <div
                   style={{ width: `${callsPct}%` }}
-                  className="h-full bg-[#6ec93f] rounded-full transition-all duration-500"
+                  className="h-full bg-[#FE88E6] rounded-full transition-all duration-500"
                 />
               </div>
             </div>
@@ -138,7 +138,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
                 <div
                   style={{ width: `${revPct}%` }}
-                  className="h-full bg-[#1f8a4c] rounded-full transition-all duration-500"
+                  className="h-full bg-[#FE88E6] rounded-full transition-all duration-500"
                 />
               </div>
             </div>
@@ -198,7 +198,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
                             call.resultado === 'Reunião marcada'
-                              ? 'bg-[#dff6bc] text-[#254a0e]'
+                              ? 'bg-[#FE88E6] text-[#1B1B1C]'
                               : call.resultado === 'Interessado'
                               ? 'bg-[#e2e8f5] text-[#41577f]'
                               : 'bg-[#ecece5] text-[#6f6e66]'
@@ -218,7 +218,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
                               deleteCall(call.id);
                             }
                           }}
-                          className="p-1.5 rounded-xl bg-[#f8dcda] hover:bg-[#f3cac7] text-[#bd453c] transition-colors"
+                          className="p-1.5 rounded-xl bg-[#1B1B1C] hover:bg-[#1B1B1C]/95 text-white transition-colors"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>

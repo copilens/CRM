@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCRM } from '@/context/crm-context';
 import { Meeting, MeetingType, MeetingStatus } from '@/types/crm';
 import { todayStr } from '@/lib/formatters';
@@ -21,32 +21,32 @@ export function MeetingModal({
   meetingToEdit,
   prefillClientId,
 }: MeetingModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <MeetingModalForm
+      onClose={onClose}
+      meetingToEdit={meetingToEdit}
+      prefillClientId={prefillClientId}
+    />
+  );
+}
+
+function MeetingModalForm({
+  onClose,
+  meetingToEdit,
+  prefillClientId,
+}: Pick<MeetingModalProps, 'onClose' | 'meetingToEdit' | 'prefillClientId'>) {
   const { data, addOrUpdateMeeting } = useCRM();
 
-  const [clienteId, setClienteId] = useState('');
-  const [dataReuniao, setDataReuniao] = useState(todayStr());
-  const [hora, setHora] = useState('09:00');
-  const [tipo, setTipo] = useState<MeetingType>('presencial');
-  const [status, setStatus] = useState<MeetingStatus>('agendada');
-  const [notas, setNotas] = useState('');
-
-  useEffect(() => {
-    if (meetingToEdit) {
-      setClienteId(meetingToEdit.cliente_id || '');
-      setDataReuniao(meetingToEdit.data || todayStr());
-      setHora(meetingToEdit.hora || '09:00');
-      setTipo(meetingToEdit.tipo || 'presencial');
-      setStatus(meetingToEdit.status || 'agendada');
-      setNotas(meetingToEdit.notas || '');
-    } else {
-      setClienteId(prefillClientId || data.clients[0]?.id || '');
-      setDataReuniao(todayStr());
-      setHora('09:00');
-      setTipo('presencial');
-      setStatus('agendada');
-      setNotas('');
-    }
-  }, [meetingToEdit, prefillClientId, data.clients, isOpen]);
+  const [clienteId, setClienteId] = useState(
+    meetingToEdit?.cliente_id || prefillClientId || data.clients[0]?.id || ''
+  );
+  const [dataReuniao, setDataReuniao] = useState(meetingToEdit?.data || todayStr());
+  const [hora, setHora] = useState(meetingToEdit?.hora || '09:00');
+  const [tipo, setTipo] = useState<MeetingType>(meetingToEdit?.tipo || 'presencial');
+  const [status, setStatus] = useState<MeetingStatus>(meetingToEdit?.status || 'agendada');
+  const [notas, setNotas] = useState(meetingToEdit?.notas || '');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ export function MeetingModal({
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen
       onClose={onClose}
       title={meetingToEdit ? 'Editar Reunião' : 'Nova Reunião'}
       description="Marque compromissos e reuniões comerciais com clientes"

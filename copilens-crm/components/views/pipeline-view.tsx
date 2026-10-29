@@ -84,7 +84,7 @@ export function PipelineView({ onScheduleMeeting, onEditClient }: PipelineViewPr
               onDragOver={(e) => handleDragOver(e, stage.key)}
               onDragLeave={handleDragLeave}
               onDrop={() => handleDrop(stage.key)}
-              className={`w-72 flex-shrink-0 rounded-[22px] bg-[#f4f3ef] flex flex-col max-h-[75vh] transition-all border ${
+              className={`w-72 shrink-0 rounded-[22px] bg-[#f4f3ef] flex flex-col max-h-[75vh] transition-all border ${
                 isOver
                   ? 'border-[#6ec93f] bg-[#e3e2da] shadow-md ring-2 ring-[#6ec93f]/20'
                   : 'border-transparent'
@@ -101,7 +101,7 @@ export function PipelineView({ onScheduleMeeting, onEditClient }: PipelineViewPr
               </div>
 
               {/* Column Body */}
-              <div className="p-3 overflow-y-auto space-y-2.5 flex-1 min-h-[140px]">
+              <div className="p-3 overflow-y-auto space-y-2.5 flex-1 min-h-35">
                 {clientsInStage.length === 0 ? (
                   <div className="h-full flex items-center justify-center p-6 text-center text-xs text-[#a3a297] font-medium border-2 border-dashed border-[rgba(14,16,10,0.06)] rounded-xl">
                     Sem leads nesta etapa

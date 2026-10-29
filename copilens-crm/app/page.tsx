@@ -18,6 +18,7 @@ import { MeetingModal } from '@/components/modals/meeting-modal';
 import { DealModal } from '@/components/modals/deal-modal';
 import { ExpenseModal } from '@/components/modals/expense-modal';
 import { CallModal } from '@/components/modals/call-modal';
+import { CRMHydrationBoundary } from '@/components/crm-hydration-boundary';
 
 import { Client, Meeting } from '@/types/crm';
 import { CheckCircle2, AlertTriangle } from 'lucide-react';
@@ -63,7 +64,7 @@ function CRMApp() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex antialiased">
+    <div className="min-h-screen bg-[#FFFFFF] flex antialiased">
       {/* Sidebar Navigation */}
       <Sidebar
         isOpen={mobileMenuOpen}
@@ -145,11 +146,11 @@ function CRMApp() {
         <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-200">
           <div className="bg-white rounded-2xl shadow-2xl border border-[rgba(14,16,10,0.08)] px-4 py-3 flex items-center gap-3">
             {toast.type === 'error' ? (
-              <AlertTriangle className="h-5 w-5 text-[#bd453c]" />
+              <AlertTriangle className="h-5 w-5 text-[#FE88E6]" />
             ) : (
-              <CheckCircle2 className="h-5 w-5 text-[#1f8a4c]" />
+              <CheckCircle2 className="h-5 w-5 text-[#1B1B1C]" />
             )}
-            <span className="text-sm font-bold text-[#14150f]">{toast.message}</span>
+            <span className="text-sm font-bold text-[#1B1B1C]">{toast.message}</span>
           </div>
         </div>
       )}
@@ -160,7 +161,9 @@ function CRMApp() {
 export default function Home() {
   return (
     <CRMProvider>
-      <CRMApp />
+      <CRMHydrationBoundary>
+        <CRMApp />
+      </CRMHydrationBoundary>
     </CRMProvider>
   );
 }

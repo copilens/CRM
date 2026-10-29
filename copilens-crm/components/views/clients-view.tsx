@@ -6,7 +6,7 @@ import { capitalize } from '@/lib/formatters';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Client } from '@/types/crm';
+import { Client, ClientStatus } from '@/types/crm';
 import {
   Users,
   Search,
@@ -29,7 +29,7 @@ export function ClientsView({ onNewClient, onEditClient, onScheduleMeeting }: Cl
   const { data, deleteClient } = useCRM();
 
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState<ClientStatus | ''>('');
 
   let filtered = [...data.clients];
 
@@ -74,7 +74,7 @@ export function ClientsView({ onNewClient, onEditClient, onScheduleMeeting }: Cl
 
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            onChange={(e) => setStatusFilter(e.target.value as ClientStatus | '')}
             className="h-9 px-3 rounded-full text-xs font-semibold bg-[#f4f3ef] border border-[rgba(14,16,10,0.1)] text-[#14150f] focus:outline-none"
           >
             <option value="">Todos os estados</option>
@@ -146,7 +146,7 @@ export function ClientsView({ onNewClient, onEditClient, onScheduleMeeting }: Cl
                       )}
                     </td>
                     <td className="py-3.5 px-5">
-                      <Badge variant={client.status as any}>{capitalize(client.status)}</Badge>
+                      <Badge variant={client.status}>{capitalize(client.status)}</Badge>
                     </td>
                     <td className="py-3.5 px-5 text-right">
                       <div className="flex items-center justify-end gap-1.5">

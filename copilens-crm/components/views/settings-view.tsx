@@ -9,100 +9,7 @@ import {
 } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Database, Check, Copy, RefreshCw, ExternalLink, ShieldCheck, AlertCircle } from 'lucide-react';
-
-const SUPABASE_SQL_SCRIPT = `-- ==========================================================
--- COPILENS CRM - ESQUEMA SUPABASE POSTGRESQL
--- Copie e cole este código no SQL Editor do seu projeto Supabase
--- ==========================================================
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
--- 1. Clientes
-CREATE TABLE IF NOT EXISTS public.clients (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    nome TEXT NOT NULL,
-    empresa TEXT DEFAULT '',
-    setor TEXT DEFAULT '',
-    telefone TEXT DEFAULT '',
-    email TEXT DEFAULT '',
-    status TEXT NOT NULL DEFAULT 'lead' CHECK (status IN ('lead', 'ativo', 'inativo')),
-    stage TEXT NOT NULL DEFAULT 'lead' CHECK (stage IN ('lead', 'contato', 'reuniao', 'proposta', 'fechado', 'perdido')),
-    notas TEXT DEFAULT ''
-);
-
--- 2. Reuniões / Agenda
-CREATE TABLE IF NOT EXISTS public.meetings (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    cliente_id UUID REFERENCES public.clients(id) ON DELETE SET NULL,
-    data DATE NOT NULL,
-    hora TEXT NOT NULL DEFAULT '09:00',
-    tipo TEXT NOT NULL DEFAULT 'presencial' CHECK (tipo IN ('presencial', 'online', 'chamada')),
-    status TEXT NOT NULL DEFAULT 'agendada' CHECK (status IN ('agendada', 'realizada', 'remarcada', 'cancelada')),
-    notas TEXT DEFAULT ''
-);
-
--- 3. Negócios Fechados (Faturamento)
-CREATE TABLE IF NOT EXISTS public.deals (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    cliente_id UUID REFERENCES public.clients(id) ON DELETE SET NULL,
-    descricao TEXT NOT NULL DEFAULT 'Trabalho fechado',
-    valor NUMERIC(15, 2) NOT NULL DEFAULT 0,
-    data DATE NOT NULL,
-    forma_pagamento TEXT NOT NULL DEFAULT 'Multicaixa'
-);
-
--- 4. Despesas
-CREATE TABLE IF NOT EXISTS public.expenses (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    descricao TEXT NOT NULL,
-    categoria TEXT NOT NULL DEFAULT 'Ferramentas/Software',
-    valor NUMERIC(15, 2) NOT NULL DEFAULT 0,
-    data DATE NOT NULL
-);
-
--- 5. Contactos / Chamadas
-CREATE TABLE IF NOT EXISTS public.calls (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    cliente_id UUID REFERENCES public.clients(id) ON DELETE SET NULL,
-    data DATE NOT NULL,
-    resultado TEXT NOT NULL DEFAULT 'Sem resposta' CHECK (resultado IN ('Sem resposta', 'Interessado', 'Reunião marcada', 'Não interessado')),
-    notas TEXT DEFAULT ''
-);
-
--- 6. Metas Mensais
-CREATE TABLE IF NOT EXISTS public.goals (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    calls_monthly INTEGER NOT NULL DEFAULT 60,
-    revenue_monthly NUMERIC(15, 2) NOT NULL DEFAULT 500000
-);
-
--- Inserir meta padrão se não existir
-INSERT INTO public.goals (calls_monthly, revenue_monthly)
-SELECT 60, 500000
-WHERE NOT EXISTS (SELECT 1 FROM public.goals);
-
--- RLS
-ALTER TABLE public.clients ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.meetings ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.deals ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.expenses ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.calls ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.goals ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.clients FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.meetings FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.deals FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.expenses FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.calls FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Permitir tudo aos utilizadores" ON public.goals FOR ALL USING (true) WITH CHECK (true);
-`;
+import { Database, RefreshCw, ExternalLink, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export function SettingsView() {
   const { isSupabaseActive, syncWithSupabase, showToast } = useCRM();
@@ -110,7 +17,6 @@ export function SettingsView() {
   const [url, setUrl] = useState(() => getSupabaseCredentials().url);
   const [anonKey, setAnonKey] = useState(() => getSupabaseCredentials().anonKey);
   const [testing, setTesting] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const handleSaveAndTest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,15 +39,8 @@ export function SettingsView() {
     }
   };
 
-  const handleCopySql = () => {
-    navigator.clipboard.writeText(SUPABASE_SQL_SCRIPT);
-    setCopied(true);
-    showToast('Esquema SQL copiado para a área de transferência!');
-    setTimeout(() => setCopied(false), 2500);
-  };
-
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-8 max-w-full">
       {/* Status banner */}
       <div
         className={`p-5 rounded-[22px] flex items-start gap-3.5 border ${
@@ -151,9 +50,9 @@ export function SettingsView() {
         }`}
       >
         {isSupabaseActive ? (
-          <ShieldCheck className="h-6 w-6 text-[#1f8a4c] flex-shrink-0 mt-0.5" />
+          <ShieldCheck className="h-6 w-6 text-[#1f8a4c] shrink-0 mt-0.5" />
         ) : (
-          <AlertCircle className="h-6 w-6 text-[#a8631f] flex-shrink-0 mt-0.5" />
+          <AlertCircle className="h-6 w-6 text-[#a8631f] shrink-0 mt-0.5" />
         )}
         <div className="space-y-1">
           <h4 className="font-extrabold text-sm">
@@ -224,7 +123,7 @@ export function SettingsView() {
         </form>
       </div>
 
-      {/* SQL Script / Schema Section */}
+      {/* SQL Script / Schema Section
       <div className="bg-[#f4f3ef] rounded-[22px] p-6">
         <div className="flex items-center justify-between mb-3">
           <div>
@@ -244,7 +143,7 @@ export function SettingsView() {
         <div className="relative rounded-xl overflow-hidden bg-[#1c1c1c] text-white p-4 font-mono text-xs leading-relaxed max-h-72 overflow-y-auto">
           <pre>{SUPABASE_SQL_SCRIPT}</pre>
         </div>
-      </div>
+      </div>*/}
     </div>
   );
 }

@@ -18,8 +18,7 @@ import {
   saveLocalCRMData,
   fetchRemoteCRMData,
   syncEntityToSupabase,
-  isSupabaseConfigured,
-  getSupabase
+  isSupabaseConfigured
 } from '@/lib/supabase';
 
 interface CRMContextType {
@@ -89,8 +88,8 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
       setLoading(true);
       const local = loadLocalCRMData();
       setData(local);
-      await syncWithSupabase();
       setLoading(false);
+      await syncWithSupabase();
     };
     init();
   }, [syncWithSupabase]);
@@ -304,12 +303,16 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
 
   // GOALS
   const updateGoals = async (goals: Goals) => {
+    const updatedGoals = {
+      ...goals,
+      id: goals.id || data.goals.id || crypto.randomUUID(),
+    };
     updateDataAndSync((prev) => ({
       ...prev,
-      goals,
+      goals: updatedGoals,
     }));
     showToast('Metas mensais guardadas');
-    await syncEntityToSupabase('goals', goals);
+    await syncEntityToSupabase('goals', updatedGoals);
   };
 
   // EXPORT / IMPORT

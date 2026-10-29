@@ -61,14 +61,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar Drawer */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-60 bg-white border-r border-[rgba(14,16,10,0.06)] flex flex-col p-5 transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-60 bg-[#FFFFFF] flex flex-col p-5 transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Brand */}
         <div className="flex items-center justify-between pb-6 mb-2">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-[#f4f3ef] border border-[rgba(14,16,10,0.08)] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 bg-[#f4f3ef] border border-[rgba(14,16,10,0.08)] flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/img/5.png"
@@ -80,7 +80,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               />
             </div>
             <div className="leading-tight">
-              <span className="font-extrabold text-[15px] tracking-tight block text-[#14150f]">
+              <span className="font-bold text-[15px] tracking-tight block text-[#14150f]">
                 copilens
               </span>
               <span className="font-medium text-[11px] text-[#6f6e66] block">
@@ -98,12 +98,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         {/* Navigation */}
-        <div className="flex-1 overflow-y-auto space-y-6">
+        <div className="flex-1 overflow-y-auto space-y-10">
           {/* Section: Principal */}
           <div>
-            <span className="text-[10.5px] uppercase font-bold tracking-wider text-[#a3a297] px-3 mb-1.5 block">
-              Principal
-            </span>
             <nav className="space-y-1">
               <button
                 onClick={() => handleNavClick('dashboard')}
@@ -121,7 +118,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={() => handleNavClick('agenda')}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-colors ${
                   activeView === 'agenda'
-                    ? 'bg-[#f4f3ef] text-[#14150f] font-bold'
+                    ? 'bg-[#F4F3EF] text-[#14150f] font-bold'
                     : 'text-[#6f6e66] hover:bg-[#f4f3ef] hover:text-[#14150f]'
                 }`}
               >
@@ -169,9 +166,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
           {/* Section: Finanças */}
           <div>
-            <span className="text-[10.5px] uppercase font-bold tracking-wider text-[#a3a297] px-3 mb-1.5 block">
-              Finanças
-            </span>
             <nav className="space-y-1">
               <button
                 onClick={() => handleNavClick('faturamento')}
@@ -201,9 +195,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
           {/* Section: Integrações */}
           <div>
-            <span className="text-[10.5px] uppercase font-bold tracking-wider text-[#a3a297] px-3 mb-1.5 block">
-              Integrações
-            </span>
             <nav className="space-y-1">
               <button
                 onClick={() => handleNavClick('settings')}
@@ -221,7 +212,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         {/* Sidebar Footer: Backup Export/Import */}
-        <div className="pt-4 border-t border-[rgba(14,16,10,0.06)] space-y-1.5">
+        <div className="pt-4 space-y-1.5">
           <button
             onClick={exportBackup}
             className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#a3a297] hover:text-[#14150f] hover:bg-[#f4f3ef] transition-colors"

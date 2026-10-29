@@ -212,7 +212,11 @@ export async function fetchRemoteCRMData(): Promise<CRMData | null> {
       expenses: (expensesRes.data || []) as Expense[],
       calls: (callsRes.data || []) as CallLog[],
       goals: goalsRes.data
-        ? { calls_monthly: goalsRes.data.calls_monthly, revenue_monthly: Number(goalsRes.data.revenue_monthly) }
+        ? {
+            id: goalsRes.data.id,
+            calls_monthly: goalsRes.data.calls_monthly,
+            revenue_monthly: Number(goalsRes.data.revenue_monthly),
+          }
         : { calls_monthly: 60, revenue_monthly: 500000 },
     };
   } catch (err) {
@@ -221,12 +225,27 @@ export async function fetchRemoteCRMData(): Promise<CRMData | null> {
   }
 }
 
-export async function syncEntityToSupabase(table: string, payload: any, isDelete = false): Promise<boolean> {
+type SyncTable = 'clients' | 'meetings' | 'deals' | 'expenses' | 'calls' | 'goals';
+type SyncPayload =
+  | Client
+  | Meeting
+  | Deal
+  | Expense
+  | CallLog
+  | (Goals & { id: string })
+  | { id: string };
+
+export async function syncEntityToSupabase(
+  table: SyncTable,
+  payload: SyncPayload,
+  isDelete = false
+): Promise<boolean> {
   const sb = getSupabase();
   if (!sb) return false;
 
   try {
     if (isDelete) {
+      if (!('id' in payload) || !payload.id) return false;
       const { error } = await sb.from(table).delete().eq('id', payload.id);
       if (error) throw error;
     } else {

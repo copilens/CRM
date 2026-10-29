@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCRM } from '@/context/crm-context';
 import { Client, ClientStatus, FunnelStage } from '@/types/crm';
 import { Modal } from '@/components/ui/dialog';
@@ -14,38 +14,25 @@ interface ClientModalProps {
 }
 
 export function ClientModal({ isOpen, onClose, clientToEdit }: ClientModalProps) {
+  if (!isOpen) return null;
+
+  return <ClientModalForm onClose={onClose} clientToEdit={clientToEdit} />;
+}
+
+function ClientModalForm({
+  onClose,
+  clientToEdit,
+}: Pick<ClientModalProps, 'onClose' | 'clientToEdit'>) {
   const { addOrUpdateClient } = useCRM();
 
-  const [nome, setNome] = useState('');
-  const [empresa, setEmpresa] = useState('');
-  const [setor, setSetor] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<ClientStatus>('lead');
-  const [stage, setStage] = useState<FunnelStage>('lead');
-  const [notas, setNotas] = useState('');
-
-  useEffect(() => {
-    if (clientToEdit) {
-      setNome(clientToEdit.nome || '');
-      setEmpresa(clientToEdit.empresa || '');
-      setSetor(clientToEdit.setor || '');
-      setTelefone(clientToEdit.telefone || '');
-      setEmail(clientToEdit.email || '');
-      setStatus(clientToEdit.status || 'lead');
-      setStage(clientToEdit.stage || 'lead');
-      setNotas(clientToEdit.notas || '');
-    } else {
-      setNome('');
-      setEmpresa('');
-      setSetor('');
-      setTelefone('');
-      setEmail('');
-      setStatus('lead');
-      setStage('lead');
-      setNotas('');
-    }
-  }, [clientToEdit, isOpen]);
+  const [nome, setNome] = useState(clientToEdit?.nome || '');
+  const [empresa, setEmpresa] = useState(clientToEdit?.empresa || '');
+  const [setor, setSetor] = useState(clientToEdit?.setor || '');
+  const [telefone, setTelefone] = useState(clientToEdit?.telefone || '');
+  const [email, setEmail] = useState(clientToEdit?.email || '');
+  const [status, setStatus] = useState<ClientStatus>(clientToEdit?.status || 'lead');
+  const [stage, setStage] = useState<FunnelStage>(clientToEdit?.stage || 'lead');
+  const [notas, setNotas] = useState(clientToEdit?.notas || '');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +55,7 @@ export function ClientModal({ isOpen, onClose, clientToEdit }: ClientModalProps)
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen
       onClose={onClose}
       title={clientToEdit ? 'Editar Cliente' : 'Novo Cliente'}
       description="Preencha as informações do cliente ou empresa parceira"
