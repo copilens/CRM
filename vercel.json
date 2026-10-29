@@ -1,4 +1,6 @@
 {
+  "framework": null,
   "installCommand": "npm --prefix copilens-crm ci",
-  "buildCommand": "npm --prefix copilens-crm run build"
+  "buildCommand": "npm --prefix copilens-crm run build",
+  "outputDirectory": "copilens-crm/out"
 }
