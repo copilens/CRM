@@ -34,14 +34,14 @@ export function Modal({ isOpen, onClose, title, description, children, maxWidth 
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-black/12 backdrop-blur-xs transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
       {/* Modal Dialog Box */}
       <div
         className={cn(
-          'relative w-full rounded-[22px] bg-white p-6 shadow-2xl transition-all my-8 z-10 animate-in zoom-in-95',
+          'relative w-full rounded-[22px] bg-white p-6 transition-all my-8 z-10 animate-in zoom-in-95',
           maxWidth
         )}
       >
