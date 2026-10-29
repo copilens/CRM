@@ -146,7 +146,7 @@ export function DashboardView() {
           <span className="text-xs font-bold text-[#6f6e66] block mb-1">
             Faturado esta semana
           </span>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block tabular-nums">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block tabular-nums">
             {fmtKz(weekTotal)}
           </span>
         </div>
@@ -159,7 +159,7 @@ export function DashboardView() {
           <span className="text-xs font-bold text-[#6f6e66] block mb-1">
             Faturado este mês
           </span>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block tabular-nums">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block tabular-nums">
             {fmtKz(monthTotal)}
           </span>
           <div className="mt-2 text-[11.5px] text-[#6f6e66] flex items-center gap-1.5">
@@ -177,7 +177,7 @@ export function DashboardView() {
                 {Math.abs(deltaPct).toFixed(1)}%
               </span>
             ) : monthTotal > 0 ? (
-              <span className="px-2 py-0.5 rounded-full font-bold text-[11px] bg-[#dff6bc] text-[#254a0e]">
+              <span className="px-2 py-0.5 rounded-full font-bold text-[11px] bg-[#FE88E6]/80 text-[#1B1B1C]">
                 Novo
               </span>
             ) : null}
@@ -193,7 +193,7 @@ export function DashboardView() {
           <span className="text-xs font-bold text-[#6f6e66] block mb-1">
             Faturado este ano
           </span>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block tabular-nums">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block tabular-nums">
             {fmtKz(yearTotal)}
           </span>
         </div>
@@ -206,7 +206,7 @@ export function DashboardView() {
           <span className="text-xs font-bold text-[#6f6e66] block mb-1">
             Reuniões hoje
           </span>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block">
             {todaysMeetings.length}
           </span>
           <p className="mt-2 text-[11.5px] text-[#6f6e66] truncate">
@@ -233,7 +233,7 @@ export function DashboardView() {
                 Ver detalhes <ChevronRight className="h-3 w-3" />
               </button>
             </div>
-            <div className="text-2xl font-extrabold tracking-tight text-[#14150f] mt-1">
+            <div className="text-2xl font-bold tracking-tight text-[#14150f] mt-1">
               {fmtKz(total6Months)}
             </div>
           </div>
@@ -256,8 +256,8 @@ export function DashboardView() {
                         style={{ height: `${heightPct}%` }}
                         className={`w-full rounded-xl transition-all duration-500 ${
                           i === monthsData.length - 1
-                            ? 'bg-[#1f8a4c] hover:bg-[#186e3c]'
-                            : 'bg-[#6ec93f] hover:bg-[#5db332]'
+                            ? 'bg-[#1B1B1C] hover:bg-[#1B1B1C]/95'
+                            : 'bg-[#FE88E6] hover:bg-[#FE88E6]/95'
                         }`}
                       />
                     </div>
@@ -275,7 +275,7 @@ export function DashboardView() {
         <div className="bg-[#f4f3ef] rounded-[22px] p-6 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-extrabold text-base text-[#14150f]">Metas deste mês</h3>
+              <h3 className="font-bold text-base text-[#14150f]">Metas deste mês</h3>
               <Button
                 variant="ghost"
                 size="sm"
@@ -297,7 +297,7 @@ export function DashboardView() {
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
                 <div
                   style={{ width: `${callsPct}%` }}
-                  className="h-full bg-[#6ec93f] rounded-full transition-all duration-500"
+                  className="h-full bg-[#1c1c1c] rounded-full transition-all duration-500"
                 />
               </div>
             </div>
@@ -308,13 +308,13 @@ export function DashboardView() {
                 <span className="text-[#6f6e66]">Faturamento mensal</span>
                 <span className="text-[#14150f]">{revPct}%</span>
               </div>
-              <div className="text-sm font-extrabold text-[#14150f] mb-1.5">
+              <div className="text-sm font-bold text-[#14150f] mb-1.5">
                 {fmtKz(monthTotal)} / {fmtKz(revGoal)}
               </div>
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
                 <div
                   style={{ width: `${revPct}%` }}
-                  className="h-full bg-[#1f8a4c] rounded-full transition-all duration-500"
+                  className="h-full bg-[#1c1c1c] rounded-full transition-all duration-500"
                 />
               </div>
             </div>
@@ -333,7 +333,7 @@ export function DashboardView() {
       {/* Upcoming Meetings Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+          <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
             Próximas reuniões
           </h2>
           <Button
@@ -358,7 +358,7 @@ export function DashboardView() {
                 className="flex items-center justify-between p-4 rounded-2xl bg-[#f4f3ef] hover:bg-[#ecece5] transition-colors"
               >
                 <div className="flex items-center gap-4">
-                  <span className="font-extrabold text-sm sm:text-base text-[#14150f] w-14">
+                  <span className="font-bold text-sm sm:text-base text-[#14150f] w-14">
                     {m.hora}
                   </span>
                   <div>
@@ -382,7 +382,7 @@ export function DashboardView() {
       {/* Recent Deals Table Section */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+          <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
             Negócios recentes fechados
           </h2>
           <Button
@@ -417,7 +417,7 @@ export function DashboardView() {
                         {getClientName(deal.cliente_id)}
                       </td>
                       <td className="py-3.5 px-5 text-[#6f6e66]">{deal.descricao}</td>
-                      <td className="py-3.5 px-5 font-extrabold text-[#14150f] tabular-nums">
+                      <td className="py-3.5 px-5 font-bold text-[#14150f] tabular-nums">
                         {fmtKz(deal.valor)}
                       </td>
                       <td className="py-3.5 px-5 text-[#6f6e66]">{fmtDate(deal.data)}</td>

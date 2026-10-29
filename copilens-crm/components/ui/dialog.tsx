@@ -47,7 +47,7 @@ export function Modal({ isOpen, onClose, title, description, children, maxWidth 
       >
         <div className="flex items-center justify-between pb-3 border-b border-[rgba(14,16,10,0.06)]">
           <div>
-            <h3 className="text-lg font-extrabold tracking-tight text-[#14150f]">{title}</h3>
+            <h3 className="text-lg font-bold tracking-tight text-[#14150f]">{title}</h3>
             {description && <p className="text-xs text-[#6f6e66] mt-0.5">{description}</p>}
           </div>
           <button

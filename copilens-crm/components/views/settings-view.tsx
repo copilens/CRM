@@ -43,24 +43,24 @@ export function SettingsView() {
     <div className="space-y-8 max-w-full">
       {/* Status banner */}
       <div
-        className={`p-5 rounded-[22px] flex items-start gap-3.5 border ${
+        className={`p-5 rounded-3xl flex items-start gap-3.5 ${
           isSupabaseActive
-            ? 'bg-[#dff6bc]/40 border-[#6ec93f]/30 text-[#254a0e]'
-            : 'bg-[#f4f3ef] border-[rgba(14,16,10,0.08)] text-[#14150f]'
+            ? 'bg-[#FE88E6] text-[#1B1B1C]'
+            : 'bg-[#F4F3EF] text-[#1B1B1C]'
         }`}
       >
         {isSupabaseActive ? (
-          <ShieldCheck className="h-6 w-6 text-[#1f8a4c] shrink-0 mt-0.5" />
+          <ShieldCheck className="h-6 w-6 text-[#1B1B1C] shrink-0 mt-0.5" />
         ) : (
-          <AlertCircle className="h-6 w-6 text-[#a8631f] shrink-0 mt-0.5" />
+          <AlertCircle className="h-6 w-6 text-white shrink-0 mt-0.5" />
         )}
         <div className="space-y-1">
-          <h4 className="font-extrabold text-sm">
+          <h4 className="font-bold text-sm">
             {isSupabaseActive
               ? 'Supabase Conectado e Operacional'
               : 'Modo Local Ativo (Offline Fallback)'}
           </h4>
-          <p className="text-xs text-[#6f6e66] leading-relaxed">
+          <p className="text-xs text-[#1B1B1C] leading-relaxed">
             {isSupabaseActive
               ? 'Todos os seus dados (clientes, reuniões, faturamento, despesas e metas) estão sincronizados diretamente com a sua base de dados PostgreSQL no Supabase.'
               : 'A aplicação está a funcionar com armazenamento seguro no navegador (localStorage). Para sincronizar na nuvem e partilhar com a equipa, configure as credenciais abaixo.'}
@@ -73,7 +73,7 @@ export function SettingsView() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Database className="h-5 w-5 text-[#14150f]" />
-            <h3 className="font-extrabold text-base text-[#14150f]">
+            <h3 className="font-bold text-base text-[#14150f]">
               Credenciais do Projeto Supabase
             </h3>
           </div>
@@ -127,7 +127,7 @@ export function SettingsView() {
       <div className="bg-[#f4f3ef] rounded-[22px] p-6">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-extrabold text-base text-[#14150f]">
+            <h3 className="font-bold text-base text-[#14150f]">
               Script SQL de Criação de Tabelas
             </h3>
             <p className="text-xs text-[#6f6e66]">

@@ -48,7 +48,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
               <ArrowUpRight className="h-4 w-4" />
             </div>
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block tabular-nums">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block tabular-nums">
             {fmtKz(yearRevenue)}
           </span>
         </div>
@@ -61,7 +61,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
               <ArrowDownRight className="h-4 w-4" />
             </div>
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-[#14150f] block tabular-nums">
+          <span className="text-2xl font-bold tracking-tight text-[#14150f] block tabular-nums">
             {fmtKz(yearExpenses)}
           </span>
         </div>
@@ -75,7 +75,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
             </div>
           </div>
           <span
-            className={`text-2xl font-extrabold tracking-tight block tabular-nums ${
+            className={`text-2xl font-bold tracking-tight block tabular-nums ${
               netBalance < 0 ? 'text-[#bd453c]' : 'text-[#14150f]'
             }`}
           >
@@ -88,7 +88,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
       <div>
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+            <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
               Negócios Fechados
             </h2>
             <p className="text-xs text-[#6f6e66]">
@@ -131,7 +131,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
                           {deal.forma_pagamento || 'Multicaixa'}
                         </span>
                       </td>
-                      <td className="py-3.5 px-5 font-extrabold text-[#14150f] tabular-nums">
+                      <td className="py-3.5 px-5 font-bold text-[#14150f] tabular-nums">
                         {fmtKz(deal.valor)}
                       </td>
                       <td className="py-3.5 px-5 text-[#6f6e66]">{fmtDate(deal.data)}</td>
@@ -143,7 +143,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
                               deleteDeal(deal.id);
                             }
                           }}
-                          className="p-1.5 rounded-xl bg-[#f8dcda] hover:bg-[#f3cac7] text-[#bd453c] transition-colors"
+                          className="p-1.5 rounded-xl bg-[#1B1B1C] hover:bg-[#1B1B1C]/95 text-white transition-colors"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
@@ -161,7 +161,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
       <div>
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+            <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
               Despesas Comerciais & Operacionais
             </h2>
             <p className="text-xs text-[#6f6e66]">
@@ -202,7 +202,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
                           {expense.categoria}
                         </span>
                       </td>
-                      <td className="py-3.5 px-5 font-extrabold text-[#bd453c] tabular-nums">
+                      <td className="py-3.5 px-5 font-bold text-white tabular-nums">
                         {fmtKz(expense.valor)}
                       </td>
                       <td className="py-3.5 px-5 text-[#6f6e66]">{fmtDate(expense.data)}</td>
@@ -214,7 +214,7 @@ export function FaturamentoView({ onNewDeal, onNewExpense }: FaturamentoViewProp
                               deleteExpense(expense.id);
                             }
                           }}
-                          className="p-1.5 rounded-xl bg-[#f8dcda] hover:bg-[#f3cac7] text-[#bd453c] transition-colors"
+                          className="p-1.5 rounded-xl bg-[#1B1B1C] hover:bg-[#1B1B1C]/95 text-white transition-colors"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>

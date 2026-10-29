@@ -136,11 +136,11 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
               <div key={day} className="space-y-2">
                 {/* Day Header */}
                 <div className="flex items-center gap-2 px-1">
-                  <span className="text-xs uppercase font-extrabold tracking-wider text-[#a3a297]">
+                  <span className="text-xs uppercase font-bold tracking-wider text-[#a3a297]">
                     {fmtDate(day)}
                   </span>
                   {isToday && (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#1c1c1c] text-white">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#1c1c1c] text-white">
                       Hoje
                     </span>
                   )}
@@ -154,7 +154,7 @@ export function AgendaView({ onNewMeeting, onEditMeeting }: AgendaViewProps) {
                       className="flex items-center justify-between p-4 rounded-2xl bg-[#f4f3ef] hover:bg-[#ecece5] transition-colors relative"
                     >
                       <div className="flex items-center gap-4 flex-1 min-w-0 pr-4">
-                        <div className="flex items-center gap-1.5 font-extrabold text-sm sm:text-base text-[#14150f] w-20 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 font-bold text-sm sm:text-base text-[#14150f] w-20 flex-shrink-0">
                           <Clock className="h-3.5 w-3.5 text-[#6f6e66]" />
                           <span>{m.hora}</span>
                         </div>

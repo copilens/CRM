@@ -61,7 +61,7 @@ export function PipelineView({ onScheduleMeeting, onEditClient }: PipelineViewPr
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+          <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
             Funil de Vendas Interativo
           </h2>
           <p className="text-xs text-[#6f6e66]">
@@ -86,16 +86,16 @@ export function PipelineView({ onScheduleMeeting, onEditClient }: PipelineViewPr
               onDrop={() => handleDrop(stage.key)}
               className={`w-72 shrink-0 rounded-[22px] bg-[#f4f3ef] flex flex-col max-h-[75vh] transition-all border ${
                 isOver
-                  ? 'border-[#6ec93f] bg-[#e3e2da] shadow-md ring-2 ring-[#6ec93f]/20'
+                  ? 'border-[#FE88E6] bg-[#e3e2da] shadow-md ring-2 ring-[#FE88E6]/90'
                   : 'border-transparent'
               }`}
             >
               {/* Column Head */}
               <div className="p-4 flex items-center justify-between border-b border-[rgba(14,16,10,0.06)]">
-                <span className="text-xs uppercase font-extrabold tracking-wider text-[#14150f]">
+                <span className="text-xs uppercase font-bold tracking-wider text-[#14150f]">
                   {stage.label}
                 </span>
-                <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-white text-[#14150f] shadow-xs">
+                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#1B1B1C] text-[#FFFFFF]">
                   {clientsInStage.length}
                 </span>
               </div>
@@ -117,63 +117,44 @@ export function PipelineView({ onScheduleMeeting, onEditClient }: PipelineViewPr
                         draggable
                         onDragStart={() => handleDragStart(client.id)}
                         onDragEnd={() => setDraggingClientId(null)}
-                        className={`bg-white rounded-xl p-3.5 shadow-xs border border-[rgba(14,16,10,0.06)] cursor-grab active:cursor-grabbing hover:shadow-md transition-all ${
+                        className={`bg-white rounded-xl p-3.5 cursor-grab active:cursor-grabbing transition-all ${
                           isDragging ? 'opacity-40 scale-95' : 'opacity-100'
                         }`}
                       >
                         <div
                           onClick={() => onEditClient(client)}
-                          className="font-bold text-sm text-[#14150f] hover:text-[#1f8a4c] transition-colors cursor-pointer"
+                          className="font-bold text-sm text-[#14150f] hover:text-[#1B1B1C]/90 transition-colors cursor-pointer"
                         >
                           {client.nome}
                         </div>
 
                         {client.empresa && (
                           <div className="text-xs text-[#6f6e66] flex items-center gap-1 mt-1">
-                            <Building2 className="h-3 w-3" />
-                            <span className="truncate">{client.empresa}</span>
                             {client.setor && (
-                              <span className="text-[#a3a297]">· {client.setor}</span>
+                              <span className="text-[#a3a297]">{client.setor}</span>
                             )}
                           </div>
                         )}
-
-                        {client.notas && (
-                          <p className="text-[11px] text-[#a3a297] mt-1.5 line-clamp-2">
-                            {client.notas}
-                          </p>
-                        )}
-
                         {/* Actions & Move buttons */}
-                        <div className="mt-3 pt-2.5 border-t border-[rgba(14,16,10,0.05)] flex items-center justify-between gap-1">
-                          <button
-                            type="button"
-                            onClick={() => onScheduleMeeting(client.id)}
-                            title="Agendar reunião com esta oportunidade"
-                            className="p-1 rounded-lg text-[#6f6e66] hover:bg-[#f4f3ef] hover:text-[#14150f] transition-colors text-[11px] font-bold flex items-center gap-1"
-                          >
-                            <Calendar className="h-3 w-3" />
-                            <span>Reunião</span>
-                          </button>
-
+                        <div className="mt-3 pt-2.5 flex items-center justify-between gap-1">
                           <div className="flex items-center gap-1">
                             <button
                               type="button"
                               disabled={stageIdx === 0}
                               onClick={() => moveStage(client, 'prev')}
                               title="Mover para a etapa anterior"
-                              className="h-6 w-6 rounded-md bg-[#ecece5] hover:bg-[#e3e2da] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-[#14150f] text-xs font-bold transition-colors"
+                              className="h-6 w-6 rounded-full bg-[#ecece5] hover:bg-[#e3e2da] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-[#14150f] text-xs font-bold transition-colors"
                             >
-                              <ChevronLeft className="h-3 w-3" />
+                              <ChevronLeft className="h-4 w-4" />
                             </button>
                             <button
                               type="button"
                               disabled={stageIdx === STAGES.length - 1}
                               onClick={() => moveStage(client, 'next')}
                               title="Avançar para a próxima etapa"
-                              className="h-6 w-6 rounded-md bg-[#ecece5] hover:bg-[#e3e2da] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-[#14150f] text-xs font-bold transition-colors"
+                              className="h-6 w-6 rounded-full bg-[#ecece5] hover:bg-[#e3e2da] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-[#14150f] text-xs font-bold transition-colors"
                             >
-                              <ChevronRight className="h-3 w-3" />
+                              <ChevronRight className="h-4 w-4" />
                             </button>
                           </div>
                         </div>

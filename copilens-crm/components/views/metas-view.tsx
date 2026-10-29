@@ -61,7 +61,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
         <div className="bg-[#f4f3ef] rounded-[22px] p-6">
           <div className="flex items-center gap-2 mb-4">
             <Target className="h-5 w-5 text-[#14150f]" />
-            <h3 className="font-extrabold text-base text-[#14150f]">
+            <h3 className="font-bold text-base text-[#14150f]">
               Definir Metas Mensais
             </h3>
           </div>
@@ -105,7 +105,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
         {/* Progress Visualizer Card */}
         <div className="bg-[#f4f3ef] rounded-[22px] p-6 flex flex-col justify-between">
           <div>
-            <h3 className="font-extrabold text-base text-[#14150f] mb-4">
+            <h3 className="font-bold text-base text-[#14150f] mb-4">
               Progresso Este Mês
             </h3>
 
@@ -113,9 +113,9 @@ export function MetasView({ onNewCall }: MetasViewProps) {
             <div className="mb-6">
               <div className="flex items-center justify-between text-xs font-bold mb-1">
                 <span className="text-[#6f6e66]">Contactos / chamadas realizadas</span>
-                <span className="text-[#14150f] font-extrabold">{callsPct}%</span>
+                <span className="text-[#14150f] font-bold">{callsPct}%</span>
               </div>
-              <div className="text-xl font-extrabold text-[#14150f] mb-1.5 tabular-nums">
+              <div className="text-xl font-bold text-[#14150f] mb-1.5 tabular-nums">
                 {callsThisMonth} / {callsGoal}
               </div>
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
@@ -130,15 +130,15 @@ export function MetasView({ onNewCall }: MetasViewProps) {
             <div>
               <div className="flex items-center justify-between text-xs font-bold mb-1">
                 <span className="text-[#6f6e66]">Faturamento atingido</span>
-                <span className="text-[#14150f] font-extrabold">{revPct}%</span>
+                <span className="text-[#14150f] font-bold">{revPct}%</span>
               </div>
-              <div className="text-xl font-extrabold text-[#14150f] mb-1.5 tabular-nums">
+              <div className="text-xl font-bold text-[#14150f] mb-1.5 tabular-nums">
                 {fmtKz(monthRevenue)} / {fmtKz(revGoal)}
               </div>
               <div className="h-2.5 w-full bg-[#ecece5] rounded-full overflow-hidden">
                 <div
                   style={{ width: `${revPct}%` }}
-                  className="h-full bg-[#FE88E6] rounded-full transition-all duration-500"
+                  className="h-full bg-[#1B1B1C] rounded-full transition-all duration-500"
                 />
               </div>
             </div>
@@ -154,7 +154,7 @@ export function MetasView({ onNewCall }: MetasViewProps) {
       <div>
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h2 className="text-lg font-extrabold tracking-tight text-[#14150f]">
+            <h2 className="text-lg font-bold tracking-tight text-[#14150f]">
               Registo de Contactos & Prospecção
             </h2>
             <p className="text-xs text-[#6f6e66]">

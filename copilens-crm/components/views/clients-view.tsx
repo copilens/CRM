@@ -170,7 +170,7 @@ export function ClientsView({ onNewClient, onEditClient, onScheduleMeeting }: Cl
                           type="button"
                           onClick={() => handleDelete(client.id, client.nome)}
                           title="Eliminar cliente"
-                          className="p-1.5 rounded-xl bg-[#f8dcda] hover:bg-[#f3cac7] text-[#bd453c] transition-colors"
+                          className="p-1.5 rounded-xl bg-[#1B1B1C] hover:bg-[#1B1B1C]/95 text-white transition-colors"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
