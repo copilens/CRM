@@ -83,9 +83,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <span className="font-bold text-[15px] tracking-tight block text-[#14150f]">
                 copilens
               </span>
-              <span className="font-medium text-[11px] text-[#6f6e66] block">
-                Team comercial
-              </span>
             </div>
           </div>
 
